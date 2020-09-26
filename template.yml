@@ -96,18 +96,6 @@ Resources:
       AttributeDefinitions:
         - AttributeName: "thingId"
           AttributeType: "N"
-        - AttributeName: "title"
-          AttributeType: "S"
-        - AttributeName: "isAbstract"
-          AttributeType: "B"
-        - AttributeName: "parentThingId"
-          AttributeType: "N"
-        - AttributeName: "createUserID"
-          AttributeType: "S"
-        - AttributeName: "changeUserID"
-          AttributeType: "S"
-        - AttributeName: "createTimestamp"
-          AttributeType: "S"
         - AttributeName: "changeTimestamp"
           AttributeType: "S"
       KeySchema:
