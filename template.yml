@@ -87,14 +87,6 @@ Resources:
         VolumeType: "gp2"
       SnapshotOptions:
         AutomatedSnapshotStartHour: "0"
-      AccessPolicies:
-        Version: "2012-10-17"
-        Statement:
-          - Effect: "Allow"
-            Principal:
-              AWS: "arn:aws:iam::123456789012:user/es-user"
-            Action: "es:*"
-            Resource: "arn:aws:es:us-east-1:846973539254:domain/elastic/*"
       AdvancedOptions:
         rest.action.multi.allow_explicit_index: "true"
 
