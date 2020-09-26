@@ -97,3 +97,34 @@ Resources:
             Resource: "arn:aws:es:us-east-1:846973539254:domain/elastic/*"
       AdvancedOptions:
         rest.action.multi.allow_explicit_index: "true"
+
+  ThingDDB:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "thingId"
+          AttributeType: "N"
+        - AttributeName: "title"
+          AttributeType: "S"
+        - AttributeName: "isAbstract"
+          AttributeType: "B"
+        - AttributeName: "parentThingId"
+          AttributeType: "N"
+        - AttributeName: "createUserID"
+          AttributeType: "S"
+        - AttributeName: "changeUserID"
+          AttributeType: "S"
+        - AttributeName: "createTimestamp"
+          AttributeType: "S"
+        - AttributeName: "changeTimestamp"
+          AttributeType: "S"
+      KeySchema:
+        - AttributeName: "thingId"
+          KeyType: "HASH"
+        - AttributeName: "changeTimestamp"
+          KeyType: "RANGE"
+      ProvisionedThroughput:
+        ReadCapacityUnits: "5"
+        WriteCapacityUnits: "5"
+      TableName: "thing"
+
