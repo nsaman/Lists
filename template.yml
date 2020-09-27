@@ -27,8 +27,8 @@ Resources:
   GetHelloWorld:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub 'awscodestar-${ProjectId}-lambda-GetHelloWorld'
-      Handler: com.aws.codestar.projecttemplates.handler.HelloWorldHandler
+      FunctionName: !Sub 'GetHelloWorldHandler-${ProjectId}'
+      Handler: com.lists.handler.HelloWorldHandler
       Runtime: java11
       Role:
         Fn::GetAtt:
@@ -44,8 +44,8 @@ Resources:
   PostHelloWorld:
     Type: AWS::Serverless::Function
     Properties:
-      FunctionName: !Sub 'awscodestar-${ProjectId}-lambda-PostHelloWorld'
-      Handler: com.aws.codestar.projecttemplates.handler.HelloWorldHandler
+      FunctionName: !Sub 'lambda-PostHelloWorldHandler-${ProjectId}'
+      Handler: com.lists.handler.HelloWorldHandler
       Runtime: java11
       Role:
         Fn::GetAtt:
