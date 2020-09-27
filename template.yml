@@ -107,7 +107,8 @@ Resources:
         ReadCapacityUnits: "5"
         WriteCapacityUnits: "5"
       TableName: "thing"
-      StreamSpecification: "NEW_IMAGES"
+      StreamSpecification:
+        StreamViewType: NEW_IMAGE
 
   DynamoThingStreamHandler:
     Type: AWS::Serverless::Function
