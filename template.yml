@@ -126,4 +126,4 @@ Resources:
     Properties:
       EventSourceArn: !GetAtt ThingDDB.StreamArn
       FunctionName: !GetAtt DynamoThingStreamHandler.Arn
-      StartingPosition: TRIM_HORIZON
+      StartingPosition: "TRIM_HORIZON"
