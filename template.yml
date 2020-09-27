@@ -107,4 +107,33 @@ Resources:
         ReadCapacityUnits: "5"
         WriteCapacityUnits: "5"
       TableName: "thing"
+      StreamSpecification: "NEW_IMAGES"
 
+  DynamoThingStreamHandler:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub 'GetHelloWorldHandler-${ProjectId}'
+      Handler: com.lists.handler.HelloWorldHandler
+      Runtime: java11
+      Role:
+        Fn::GetAtt:
+          - LambdaExecutionRole
+          - Arn
+      Events:
+        GetEvent:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
+
+  EventMapping:
+    Type: AWS::Lambda::EventSourceMapping
+    Properties:
+      EventSourceArn: !ImportValue ThingStreamArn
+      FunctionName: !GetAtt DynamoThingStreamHandler.Arn
+
+Outputs:
+  TableStreamArn:
+    Value: !GetAtt ThingDDB.StreamArn
+    Export:
+      Name: ThingStreamArn
