@@ -146,7 +146,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: !Sub 'DynamoThingStreamHandler-${ProjectId}'
-      Handler: com.lists.handler.HelloWorldHandler
+      Handler: com.lists.handler.DynamoThingStreamHandler
       Runtime: java11
       Role:
         Fn::GetAtt:
