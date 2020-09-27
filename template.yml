@@ -123,11 +123,5 @@ Resources:
   EventMapping:
     Type: AWS::Lambda::EventSourceMapping
     Properties:
-      EventSourceArn: !ImportValue ThingStreamArn
+      EventSourceArn: !GetAtt ThingDDB.StreamArn
       FunctionName: !GetAtt DynamoThingStreamHandler.Arn
-
-Outputs:
-  TableStreamArn:
-    Value: !GetAtt ThingDDB.StreamArn
-    Export:
-      Name: ThingStreamArn
