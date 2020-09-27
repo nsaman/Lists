@@ -73,6 +73,38 @@ Resources:
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
       PermissionsBoundary: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:policy/CodeStar_${ProjectId}_PermissionsBoundary'
 
+  LambdaDDBStreamRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow #allow lambda to assume this role
+            Principal:
+              Service:
+                - lambda.amazonaws.com
+            Action:
+              - sts:AssumeRole
+      Path: "/"
+      Policies:
+        - PolicyName: LambdaDDBStreamRolePolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow #allow to write logs to cloudwatch
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: arn:aws:logs:*:*:*
+              - Effect: Allow #allow lambda to read from the event stream
+                Action:
+                  - dynamodb:DescribeStream
+                  - dynamodb:GetRecords
+                  - dynamodb:GetShardIterator
+                  - dynamodb:ListStreams
+                Resource: "*"
+
   ElasticsearchDomain:
     Type: AWS::Elasticsearch::Domain
     Properties:
@@ -118,7 +150,7 @@ Resources:
       Runtime: java11
       Role:
         Fn::GetAtt:
-          - LambdaExecutionRole
+          - LambdaDDBStreamRole
           - Arn
 
   EventMapping:
