@@ -1,7 +1,6 @@
 package com.lists.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.lists.web.user.UserStub;
 
 import javax.persistence.*;
 

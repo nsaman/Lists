@@ -3,10 +3,6 @@ package com.lists.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.lists.web.AuditedEntity;
-import com.lists.web.CustomSetThing.CustomSetThing;
-import com.lists.web.compares.Compares;
-import *;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
