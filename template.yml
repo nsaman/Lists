@@ -119,12 +119,6 @@ Resources:
         Fn::GetAtt:
           - LambdaExecutionRole
           - Arn
-      Events:
-        GetEvent:
-          Type: Api
-          Properties:
-            Path: /
-            Method: get
 
   EventMapping:
     Type: AWS::Lambda::EventSourceMapping
