@@ -152,6 +152,9 @@ Resources:
         Fn::GetAtt:
           - LambdaDDBStreamRole
           - Arn
+      Environment:
+        Variables:
+          elasticEndpoint: !GetAtt ElasticsearchDomain.DomainEndpoint
 
   EventMapping:
     Type: AWS::Lambda::EventSourceMapping

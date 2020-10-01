@@ -1,9 +1,7 @@
 package com.lists.handler;
 
 import com.amazonaws.serverless.proxy.internal.testutils.MockLambdaContext;
-
 import com.lists.GatewayResponse;
-
 import org.json.JSONObject;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
