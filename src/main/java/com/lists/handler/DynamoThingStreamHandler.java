@@ -59,9 +59,13 @@ public class DynamoThingStreamHandler implements RequestHandler<DynamodbEvent, V
     BulkRequest getBulkRequest(DynamodbEvent ddbEvent) {
         BulkRequest bulkRequest = new BulkRequest();
 
+        log.info(ddbEvent.toString());
+
         for (DynamodbEvent.DynamodbStreamRecord record : ddbEvent.getRecords()) {
 
             Map<String, AttributeValue> newImage = record.getDynamodb().getNewImage();
+
+            newImage.forEach((key, value) -> log.info("Key: {} s:{} n:{}", key, value.getS(), value.getN()));
 
             JsonObject imageJson = mapToJson(newImage);
             Thing thing = gson.fromJson(imageJson, Thing.class);
