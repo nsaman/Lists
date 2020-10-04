@@ -28,7 +28,7 @@ public class DynamoThingStreamHandlerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        dynamoThingStreamHandler = new DynamoThingStreamHandler(restHighLevelClient);
+        dynamoThingStreamHandler = new DynamoThingStreamHandler();
     }
 
     @Test

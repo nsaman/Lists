@@ -33,12 +33,11 @@ public class DynamoThingStreamHandler implements RequestHandler<DynamodbEvent, V
     private static final String MODIFY = "MODIFY";
     private static final String REMOVE = "REMOVE";
 
+    @Autowired
     private RestHighLevelClient restHighLevelClient;
     private Gson gson;
 
-    @Autowired
-    public DynamoThingStreamHandler(RestHighLevelClient restHighLevelClient) {
-        this.restHighLevelClient = restHighLevelClient;
+    public DynamoThingStreamHandler() {
         gson = new Gson();
     }
 
