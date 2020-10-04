@@ -155,6 +155,7 @@ Resources:
       Environment:
         Variables:
           elasticEndpoint: !GetAtt ElasticsearchDomain.DomainEndpoint
+      Timeout: 60
 
   EventMapping:
     Type: AWS::Lambda::EventSourceMapping
