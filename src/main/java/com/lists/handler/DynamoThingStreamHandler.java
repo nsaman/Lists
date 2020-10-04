@@ -51,6 +51,8 @@ public class DynamoThingStreamHandler implements RequestHandler<DynamodbEvent, V
             log.error("Error with bulk add", ioException);
         }
 
+        log.info("Successfully inserted {} records", ddbEvent.getRecords().size());
+
         return null;
     }
 
