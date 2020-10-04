@@ -2,9 +2,6 @@ package com.lists.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,12 +10,10 @@ import java.util.Date;
  * Created by nick on 10/28/2018.
  */
 
-@Entity
 public class DateDescriptor extends Descriptor {
 
     public static final String DATE_FORMAT = "yyyy-MM-dd";
 
-    @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(pattern=DATE_FORMAT)
     private Date value;
 

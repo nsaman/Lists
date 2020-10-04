@@ -1,18 +1,9 @@
 package com.lists.model;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 /**
  * Created by nick on 2/18/2018.
  */
 
-@Entity
 public class DescriptorType extends AuditedEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer descriptorTypeID;
 
     private String Title;

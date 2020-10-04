@@ -13,6 +13,7 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -34,6 +35,14 @@ public class DynamoThingStreamHandler implements RequestHandler<DynamodbEvent, V
     private Gson gson;
 
     public DynamoThingStreamHandler() {
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext("com.lists");
+        ctx.getAutowireCapableBeanFactory().autowireBean(this);
+        gson = new Gson();
+    }
+
+    // for testing
+    public DynamoThingStreamHandler(RestHighLevelClient restHighLevelClient) {
+        this.restHighLevelClient = restHighLevelClient;
         gson = new Gson();
     }
 

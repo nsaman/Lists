@@ -2,30 +2,20 @@ package com.lists.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import javax.persistence.*;
-
 /**
  * Created by nick on 1/24/2018.
  */
 
-@MappedSuperclass
 public abstract class Descriptor extends AuditedEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer descriptorID;
 
     @JsonBackReference(value="descriptorDescribedThing")
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="describedThingID")
     private Thing describedThing;
 
-    @ManyToOne
-    @JoinColumn(name="descriptorTypeID")
     private DescriptorType descriptorType;
 
     public abstract String getReadableString();
 
-    @Transient
     final public DescriptorTypes type;
 
     Descriptor(DescriptorTypes type) {

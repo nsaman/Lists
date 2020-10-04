@@ -1,12 +1,10 @@
 package com.lists.model;
 
-import javax.persistence.Entity;
 
 /**
  * Created by nick on 10/28/2018.
  */
 
-@Entity
 public class StringDescriptor extends Descriptor {
 
     private String value;

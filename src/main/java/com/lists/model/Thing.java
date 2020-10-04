@@ -4,10 +4,6 @@ package com.lists.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
-import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,38 +11,24 @@ import java.util.Set;
  * Created by nick on 1/23/2018.
  */
 
-@Entity
 @Data
 public class Thing extends AuditedEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer thingId;
 
     private String title;
     private Boolean isAbstract;
 
     @JsonIgnore
-    @OneToMany
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name = "parentThingID")
     private Set<Thing> childThings;
 
-    @ManyToOne
-    @JoinColumn(name = "parentThingID", foreignKey = @ForeignKey(name = "FK_thing_1"))
     private Thing parentThing;
 
     @JsonIgnore
     @JsonManagedReference(value="thingCustomSetThings")
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name = "thingID")
     private Set<CustomSetThing> customSetThings = new HashSet<>();
 
     @JsonManagedReference(value="thingCompares")
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name = "thingID")
     private Set<Compares> compares = new HashSet<>();
 
     @JsonManagedReference
@@ -65,45 +47,24 @@ public class Thing extends AuditedEntity {
 
     @JsonIgnore
     @JsonManagedReference(value="thingCustomSetThings")
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name = "describedThingID")
     private Set<DateDescriptor> dateDescriptors = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name = "describedThingID")
     private Set<DoubleDescriptor> doubleDescriptors = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name = "describedThingID")
     private Set<IntegerDescriptor> integerDescriptors = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name = "describedThingID")
     private Set<LocationDescriptor> locationDescriptors = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name = "describedThingID")
     private Set<ReferenceThingDescriptor> referenceThingDescriptors = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name = "describedThingID")
     private Set<ResourceDescriptor> resourceDescriptors = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @Fetch(value = FetchMode.SUBSELECT)
-    @JoinColumn(name = "describedThingID")
     private Set<StringDescriptor> stringDescriptors = new HashSet<>();
 
     public Integer getThingId() {

@@ -1,18 +1,10 @@
 package com.lists.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 /**
  * Created by nick on 6/5/2018.
  */
-@Entity
 public class Comparator extends AuditedEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer comparatorID;
     private String title;
 

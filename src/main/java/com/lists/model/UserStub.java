@@ -1,17 +1,10 @@
 package com.lists.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 /**
  * Created by nick on 9/30/2018.
  */
 
-@Entity
-@Table(name="users")
 public class UserStub {
-    @Id
     private String username;
 
     private Boolean enabled;
