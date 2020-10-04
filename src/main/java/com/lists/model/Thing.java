@@ -21,7 +21,7 @@ public class Thing extends AuditedEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer thingID;
+    private Integer thingId;
 
     private String title;
     private Boolean isAbstract;
@@ -106,12 +106,12 @@ public class Thing extends AuditedEntity {
     @JoinColumn(name = "describedThingID")
     private Set<StringDescriptor> stringDescriptors = new HashSet<>();
 
-    public Integer getThingID() {
-        return thingID;
+    public Integer getThingId() {
+        return thingId;
     }
 
-    public void setThingID(Integer thingID) {
-        this.thingID = thingID;
+    public void setThingId(Integer thingId) {
+        this.thingId = thingId;
     }
 
     public String getTitle() {

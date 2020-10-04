@@ -1,12 +1,9 @@
 package com.lists.handler;
 
-import com.amazonaws.services.dynamodbv2.document.Item;
-import com.amazonaws.services.dynamodbv2.document.ItemUtils;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.DynamodbEvent;
 import com.amazonaws.services.lambda.runtime.events.models.dynamodb.AttributeValue;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.*;
 import com.lists.model.Thing;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +12,6 @@ import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
@@ -73,7 +69,7 @@ public class DynamoThingStreamHandler implements RequestHandler<DynamodbEvent, V
             log.info(thing.toString());
 
             if (INSERT.equals(record.getEventName()) || MODIFY.equals(record.getEventName())) {
-                IndexRequest indexRequest = new IndexRequest("thing").id(thing.getThingID()
+                IndexRequest indexRequest = new IndexRequest("thing").id(thing.getThingId()
                         .toString()).source(gson.toJson(thing), XContentType.JSON);
 
                 bulkRequest.add(indexRequest);
