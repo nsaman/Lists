@@ -104,6 +104,10 @@ Resources:
                   - dynamodb:GetShardIterator
                   - dynamodb:ListStreams
                 Resource: "*"
+              - Effect: Allow #elasticsearch
+                Action:
+                  - es:ESHttpPost
+                Resource: "*"
 
   ElasticsearchDomain:
     Type: AWS::Elasticsearch::Domain
@@ -156,6 +160,7 @@ Resources:
         Variables:
           elasticEndpoint: !GetAtt ElasticsearchDomain.DomainEndpoint
       Timeout: 60
+      MemorySize: 256
 
   EventMapping:
     Type: AWS::Lambda::EventSourceMapping
