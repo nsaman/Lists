@@ -3,6 +3,7 @@ package com.lists.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Data;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -15,6 +16,7 @@ import java.util.Set;
  */
 
 @Entity
+@Data
 public class Thing extends AuditedEntity {
 
     @Id

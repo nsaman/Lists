@@ -1,5 +1,6 @@
 package com.lists.model;
 
+import lombok.Data;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -14,6 +15,7 @@ import java.util.Date;
 /**
  * Created by nick on 10/9/2018.
  */
+@Data
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class AuditedEntity {
@@ -27,41 +29,9 @@ public abstract class AuditedEntity {
 
     @Column(name = "createTimestamp", nullable = false, updatable = false)
     @CreatedDate
-    private Date createTimestamp;
+    private Long createTimestamp;
 
     @Column(name = "changeTimestamp")
     @LastModifiedDate
-    private Date changeTimestamp;
-
-    public String getCreateUserID() {
-        return createUserID;
-    }
-
-    public void setCreateUserID(String createUserID) {
-        this.createUserID = createUserID;
-    }
-
-    public String getChangeUserID() {
-        return changeUserID;
-    }
-
-    public void setChangeUserID(String changeUserID) {
-        this.changeUserID = changeUserID;
-    }
-
-    public Date getCreateTimestamp() {
-        return createTimestamp;
-    }
-
-    public void setCreateTimestamp(Date createTimestamp) {
-        this.createTimestamp = createTimestamp;
-    }
-
-    public Date getChangeTimestamp() {
-        return changeTimestamp;
-    }
-
-    public void setChangeTimestamp(Date changeTimestamp) {
-        this.changeTimestamp = changeTimestamp;
-    }
+    private Long changeTimestamp;
 }
