@@ -44,6 +44,7 @@ public class DynamoThingStreamHandler implements RequestHandler<DynamodbEvent, V
 
     public Void handleRequest(DynamodbEvent ddbEvent, final Context context) {
 
+        context.getLogger().log("sanity check");
         BulkRequest bulkRequest = getBulkRequest(ddbEvent);
 
         try {
@@ -53,6 +54,8 @@ public class DynamoThingStreamHandler implements RequestHandler<DynamodbEvent, V
         }
 
         log.info("Successfully inserted {} records", ddbEvent.getRecords().size());
+
+        context.getLogger().log("sanity check 2");
 
         return null;
     }
