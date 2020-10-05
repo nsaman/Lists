@@ -145,10 +145,10 @@ Resources:
                   - es:*
                 Resource: "*"
 
-  ElasticsearchDomain:
+  ListsElasticsearchDomain:
     Type: AWS::Elasticsearch::Domain
     Properties:
-      DomainName: "elastic"
+      DomainName: "lists"
       ElasticsearchClusterConfig:
         InstanceCount: "1"
         InstanceType: "t2.small.elasticsearch"
@@ -195,7 +195,7 @@ Resources:
           - Arn
       Environment:
         Variables:
-          elasticEndpoint: !GetAtt ElasticsearchDomain.DomainEndpoint
+          elasticEndpoint: !GetAtt ListsElasticsearchDomain.DomainEndpoint
       Timeout: 60
       MemorySize: 256
 
@@ -211,7 +211,7 @@ Resources:
           - Arn
       Environment:
         Variables:
-          elasticEndpoint: !GetAtt ElasticsearchDomain.DomainEndpoint
+          elasticEndpoint: !GetAtt ListsElasticsearchDomain.DomainEndpoint
       Timeout: 60
       MemorySize: 256
 
