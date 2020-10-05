@@ -89,8 +89,8 @@ public class DynamoThingStreamHandler implements RequestHandler<DynamodbEvent, V
             log.info(thing.toString());
 
             if (INSERT.equals(record.getEventName()) || MODIFY.equals(record.getEventName())) {
-                IndexRequest indexRequest = new IndexRequest("thing", "_doc").id(thing.getThingId()
-                        .toString()).source(gson.toJson(thing), XContentType.JSON);
+                IndexRequest indexRequest = new IndexRequest("thing").id(thing.getThingId().toString())
+                        .source(gson.toJson(thing), XContentType.JSON);
 
                 bulkRequest.add(indexRequest);
             }

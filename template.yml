@@ -161,6 +161,7 @@ Resources:
         AutomatedSnapshotStartHour: "0"
       AdvancedOptions:
         rest.action.multi.allow_explicit_index: "true"
+      ElasticsearchVersion: "7.7"
 
   ThingDDB:
     Type: AWS::DynamoDB::Table
