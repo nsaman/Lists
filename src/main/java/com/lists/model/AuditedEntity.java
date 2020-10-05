@@ -1,25 +1,25 @@
 package com.lists.model;
 
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperFieldModel;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBRangeKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTyped;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 
 /**
  * Created by nick on 10/9/2018.
  */
 @Data
 public abstract class AuditedEntity {
-    @CreatedBy
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.S)
     private String createUserID;
 
-    @LastModifiedBy
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.S)
     private String changeUserID;
 
-    @CreatedDate
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.N)
     private Long createTimestamp;
 
-    @LastModifiedDate
+    @DynamoDBRangeKey
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.N)
     private Long changeTimestamp;
 }

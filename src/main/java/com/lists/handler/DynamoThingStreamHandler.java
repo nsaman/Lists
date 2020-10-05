@@ -89,7 +89,7 @@ public class DynamoThingStreamHandler implements RequestHandler<DynamodbEvent, V
             log.info(thing.toString());
 
             if (INSERT.equals(record.getEventName()) || MODIFY.equals(record.getEventName())) {
-                IndexRequest indexRequest = new IndexRequest("thing").id(thing.getThingId().toString())
+                IndexRequest indexRequest = new IndexRequest(Thing.TABLE_NAME).id(thing.getThingId().toString())
                         .source(gson.toJson(thing), XContentType.JSON);
 
                 bulkRequest.add(indexRequest);
@@ -103,7 +103,9 @@ public class DynamoThingStreamHandler implements RequestHandler<DynamodbEvent, V
         map.forEach((key, value) -> {
             if (value.getNULL() != null && value.isNULL())
                 jsonObject.add(key, null);
-            else if (value.getS() != null) {
+            else if (value.getBOOL() != null) {
+                jsonObject.addProperty(key, value.getBOOL());
+            } else if (value.getS() != null) {
                 jsonObject.addProperty(key, value.getS());
             } else if (value.getN() != null) {
                 jsonObject.addProperty(key, new BigDecimal(value.getN()));

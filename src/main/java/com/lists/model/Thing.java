@@ -1,10 +1,11 @@
 package com.lists.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
 import lombok.Data;
+
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -12,162 +13,38 @@ import java.util.Set;
  */
 
 @Data
+@DynamoDBDocument
+@DynamoDBTable(tableName = Thing.TABLE_NAME)
 public class Thing extends AuditedEntity {
 
-    private Integer thingId;
+    public static final String TABLE_NAME = "thing";
+    public static final String THING_ID = "thingId";
 
+    @DynamoDBHashKey(attributeName = THING_ID)
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.N)
+    private Long thingId;
+
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.S)
     private String title;
+
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.BOOL)
     private Boolean isAbstract;
 
-    @JsonIgnore
+    @DynamoDBIgnore
     private Set<Thing> childThings;
 
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.N)
+    private Long parentId;
+
+    @DynamoDBIgnore
     private Thing parentThing;
 
-    @JsonIgnore
-    @JsonManagedReference(value="thingCustomSetThings")
+    @DynamoDBIgnore
     private Set<CustomSetThing> customSetThings = new HashSet<>();
 
-    @JsonManagedReference(value="thingCompares")
+    @DynamoDBIgnore
     private Set<Compares> compares = new HashSet<>();
 
-    @JsonManagedReference
-    public Set<Descriptor> getDescriptors() {
-        Set<Descriptor> returnDescriptors = new HashSet<>();
-        returnDescriptors.addAll(dateDescriptors);
-        returnDescriptors.addAll(doubleDescriptors);
-        returnDescriptors.addAll(integerDescriptors);
-        returnDescriptors.addAll(locationDescriptors);
-        returnDescriptors.addAll(referenceThingDescriptors);
-        returnDescriptors.addAll(resourceDescriptors);
-        returnDescriptors.addAll(stringDescriptors);
-
-        return returnDescriptors;
-    }
-
-    @JsonIgnore
-    @JsonManagedReference(value="thingCustomSetThings")
-    private Set<DateDescriptor> dateDescriptors = new HashSet<>();
-
-    @JsonIgnore
-    private Set<DoubleDescriptor> doubleDescriptors = new HashSet<>();
-
-    @JsonIgnore
-    private Set<IntegerDescriptor> integerDescriptors = new HashSet<>();
-
-    @JsonIgnore
-    private Set<LocationDescriptor> locationDescriptors = new HashSet<>();
-
-    @JsonIgnore
-    private Set<ReferenceThingDescriptor> referenceThingDescriptors = new HashSet<>();
-
-    @JsonIgnore
-    private Set<ResourceDescriptor> resourceDescriptors = new HashSet<>();
-
-    @JsonIgnore
-    private Set<StringDescriptor> stringDescriptors = new HashSet<>();
-
-    public Integer getThingId() {
-        return thingId;
-    }
-
-    public void setThingId(Integer thingId) {
-        this.thingId = thingId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Boolean getIsAbstract() {
-        return isAbstract;
-    }
-
-    public void setIsAbstract(Boolean anAbstract) {
-        isAbstract = anAbstract;
-    }
-
-    public Thing getParentThing() {
-        return parentThing;
-    }
-
-    public void setParentThing(Thing parentThing) {
-        this.parentThing = parentThing;
-    }
-
-    public Set<Compares> getCompares() {
-        return compares;
-    }
-
-    public void setCompares(Set<Compares> compares) {
-        this.compares = compares;
-    }
-
-    public Set<DateDescriptor> getDateDescriptors() {
-        return dateDescriptors;
-    }
-
-    public void setDateDescriptors(Set<DateDescriptor> dateDescriptors) {
-        this.dateDescriptors = dateDescriptors;
-    }
-
-    public Set<DoubleDescriptor> getDoubleDescriptors() {
-        return doubleDescriptors;
-    }
-
-    public void setDoubleDescriptors(Set<DoubleDescriptor> doubleDescriptors) {
-        this.doubleDescriptors = doubleDescriptors;
-    }
-
-    public Set<IntegerDescriptor> getIntegerDescriptors() {
-        return integerDescriptors;
-    }
-
-    public void setIntegerDescriptors(Set<IntegerDescriptor> integerDescriptors) {
-        this.integerDescriptors = integerDescriptors;
-    }
-
-    public Set<LocationDescriptor> getLocationDescriptors() {
-        return locationDescriptors;
-    }
-
-    public void setLocationDescriptors(Set<LocationDescriptor> locationDescriptors) {
-        this.locationDescriptors = locationDescriptors;
-    }
-
-    public Set<ReferenceThingDescriptor> getReferenceThingDescriptors() {
-        return referenceThingDescriptors;
-    }
-
-    public void setReferenceThingDescriptors(Set<ReferenceThingDescriptor> referenceThingDescriptors) {
-        this.referenceThingDescriptors = referenceThingDescriptors;
-    }
-
-    public Set<ResourceDescriptor> getResourceDescriptors() {
-        return resourceDescriptors;
-    }
-
-    public void setResourceDescriptors(Set<ResourceDescriptor> resourceDescriptors) {
-        this.resourceDescriptors = resourceDescriptors;
-    }
-
-    public Set<StringDescriptor> getStringDescriptors() {
-        return stringDescriptors;
-    }
-
-    public void setStringDescriptors(Set<StringDescriptor> stringDescriptors) {
-        this.stringDescriptors = stringDescriptors;
-    }
-
-    public Set<Thing> getChildThings() {
-        return childThings;
-    }
-
-    public void setChildThings(Set<Thing> childThings) {
-        this.childThings = childThings;
-    }
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.M)
+    public Map<String, Descriptor> Descriptors;
 }
