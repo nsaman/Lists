@@ -1,7 +1,5 @@
 package com.lists.model;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,7 +12,6 @@ public class DateDescriptor extends Descriptor {
 
     public static final String DATE_FORMAT = "yyyy-MM-dd";
 
-    @DateTimeFormat(pattern=DATE_FORMAT)
     private Date value;
 
     public DateDescriptor() {

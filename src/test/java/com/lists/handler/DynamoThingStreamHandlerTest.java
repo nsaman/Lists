@@ -29,7 +29,8 @@ public class DynamoThingStreamHandlerTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        dynamoThingStreamHandler = new DynamoThingStreamHandler(restHighLevelClient);
+        Gson gson = new Gson();
+        dynamoThingStreamHandler = new DynamoThingStreamHandler(restHighLevelClient, gson);
     }
 
     @Test
