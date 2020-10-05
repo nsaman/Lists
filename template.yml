@@ -154,7 +154,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: !Sub 'DynamoThingStreamHandler-${ProjectId}'
-      Handler: com.lists.handler.DynamoThingStreamHandler
+      Handler: com.lists.handler.DynamoThingStreamHandlerWrapper
       Runtime: java11
       Role:
         Fn::GetAtt:
@@ -170,7 +170,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: !Sub 'CreateElaticIndexesHandler-${ProjectId}'
-      Handler: com.lists.handler.CreateElaticIndexesHandler
+      Handler: com.lists.handler.CreateElaticIndexesHandlerWrapper
       Runtime: java11
       Role:
         Fn::GetAtt:
