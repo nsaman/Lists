@@ -201,7 +201,7 @@ Resources:
           - LambdaExecutionRole
           - Arn
       Timeout: 60
-      MemorySize: 128
+      MemorySize: 256
 
   CreateElaticIndexesHandler:
     Type: AWS::Serverless::Function
