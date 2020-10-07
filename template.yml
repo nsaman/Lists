@@ -161,7 +161,7 @@ Resources:
         - AttributeName: "thingId"
           AttributeType: "N"
         - AttributeName: "changeTimestamp"
-          AttributeType: "S"
+          AttributeType: "N"
       KeySchema:
         - AttributeName: "thingId"
           KeyType: "HASH"
