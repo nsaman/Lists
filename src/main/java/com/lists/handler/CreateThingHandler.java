@@ -2,6 +2,7 @@ package com.lists.handler;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.google.gson.Gson;
 import com.lists.dao.ThingDao;
 import com.lists.model.Thing;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,8 @@ public class CreateThingHandler implements RequestHandler<Thing, Void> {
     }
 
     public Void handleRequest(Thing thing, final Context context) {
+
+        log.info(new Gson().toJson(thing));
 
         thingDao.save(thing);
 
