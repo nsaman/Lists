@@ -1,8 +1,12 @@
 package com.lists.config;
 
+import com.amazonaws.PredefinedClientConfigurations;
 import com.amazonaws.auth.AWS4Signer;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.google.gson.Gson;
+import com.lists.dao.ThingDao;
 import dagger.Provides;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpRequestInterceptor;
@@ -57,6 +61,22 @@ public class Module {
     @Singleton
     Gson gson() {
         return new Gson();
+    }
+
+    @Provides
+    @Singleton
+    AmazonDynamoDB amazonDynamoDB() {
+        return AmazonDynamoDBClientBuilder
+                .standard()
+                .withRegion(awsRegion())
+                .withClientConfiguration(PredefinedClientConfigurations.dynamoDefault())
+                .build();
+    }
+
+    @Provides
+    @Singleton
+    ThingDao thingDao() {
+        return new ThingDao(amazonDynamoDB());
     }
 
 }

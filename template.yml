@@ -39,6 +39,30 @@ Resources:
       ManagedPolicyArns:
         - !Sub 'arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole'
       PermissionsBoundary: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:policy/CodeStar_${ProjectId}_PermissionsBoundary'
+      Policies:
+        - PolicyName: LambdaExecutionRolePolicy
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow #allow to write logs to cloudwatch
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: arn:aws:logs:*:*:*
+              - Effect: Allow
+                Action:
+                  - dynamodb:BatchGet
+                  - dynamodb:DescribeTable
+                  - dynamodb:Get*
+                  - dynamodb:ListStreams
+                  - dynamodb:Query
+                  - dynamodb:Scan
+                  - dynamodb:BatchWrite*
+                  - dynamodb:Delete*
+                  - dynamodb:Update*
+                  - dynamodb:PutItem
+                Resource: "*"
 
   LambdaDDBStreamRole:
     Type: AWS::IAM::Role
@@ -165,6 +189,19 @@ Resources:
           elasticEndpoint: !GetAtt ListsElasticsearchDomain.DomainEndpoint
       Timeout: 60
       MemorySize: 256
+
+  CreateThingHandlerWrapper:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub 'CreateThingHandler-${ProjectId}'
+      Handler: com.lists.handler.CreateThingHandlerWrapper
+      Runtime: java11
+      Role:
+        Fn::GetAtt:
+          - LambdaExecutionRole
+          - Arn
+      Timeout: 60
+      MemorySize: 128
 
   CreateElaticIndexesHandler:
     Type: AWS::Serverless::Function

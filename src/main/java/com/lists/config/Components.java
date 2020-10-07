@@ -1,6 +1,7 @@
 package com.lists.config;
 
 import com.lists.handler.CreateElaticIndexesHandler;
+import com.lists.handler.CreateThingHandler;
 import com.lists.handler.DynamoThingStreamHandler;
 import dagger.Component;
 
@@ -15,4 +16,6 @@ public interface Components {
     DynamoThingStreamHandler dynamoThingStreamHandler();
 
     CreateElaticIndexesHandler createElaticIndexesHandler();
+
+    CreateThingHandler createThingHandler();
 }

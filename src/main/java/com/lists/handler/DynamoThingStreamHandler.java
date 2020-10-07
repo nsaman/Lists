@@ -44,7 +44,6 @@ public class DynamoThingStreamHandler implements RequestHandler<DynamodbEvent, V
 
     public Void handleRequest(DynamodbEvent ddbEvent, final Context context) {
 
-        context.getLogger().log("sanity check");
         BulkRequest bulkRequest = getBulkRequest(ddbEvent);
 
         try {
@@ -54,8 +53,6 @@ public class DynamoThingStreamHandler implements RequestHandler<DynamodbEvent, V
         }
 
         log.info("Successfully inserted {} records", ddbEvent.getRecords().size());
-
-        context.getLogger().log("sanity check 2");
 
         return null;
     }
@@ -68,8 +65,6 @@ public class DynamoThingStreamHandler implements RequestHandler<DynamodbEvent, V
         for (DynamodbEvent.DynamodbStreamRecord record : ddbEvent.getRecords()) {
 
             Map<String, AttributeValue> newImage = record.getDynamodb().getNewImage();
-
-            newImage.forEach((key, value) -> log.info("Key: {} s:{} n:{}", key, value.getS(), value.getN()));
 
             JsonObject imageJson = mapToJson(newImage);
             Thing thing = gson.fromJson(imageJson, Thing.class);
