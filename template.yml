@@ -63,6 +63,7 @@ Resources:
                   - dynamodb:Update*
                   - dynamodb:PutItem
                   - es:ESHttpGet
+                  - es:ESHttpPost
                 Resource: "*"
 
   LambdaDDBStreamRole:
