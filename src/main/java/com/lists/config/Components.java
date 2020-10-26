@@ -3,6 +3,7 @@ package com.lists.config;
 import com.lists.handler.CreateElaticIndexesHandler;
 import com.lists.handler.CreateThingHandler;
 import com.lists.handler.DynamoThingStreamHandler;
+import com.lists.handler.SearchThingHandler;
 import dagger.Component;
 
 import javax.inject.Singleton;
@@ -18,4 +19,6 @@ public interface Components {
     CreateElaticIndexesHandler createElaticIndexesHandler();
 
     CreateThingHandler createThingHandler();
+
+    SearchThingHandler searchThingHandler();
 }
