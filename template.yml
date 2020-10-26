@@ -62,6 +62,7 @@ Resources:
                   - dynamodb:Delete*
                   - dynamodb:Update*
                   - dynamodb:PutItem
+                  - es:ESHttpGet
                 Resource: "*"
 
   LambdaDDBStreamRole:
@@ -195,6 +196,19 @@ Resources:
     Properties:
       FunctionName: !Sub 'CreateThingHandler-${ProjectId}'
       Handler: com.lists.handler.CreateThingHandlerWrapper
+      Runtime: java11
+      Role:
+        Fn::GetAtt:
+          - LambdaExecutionRole
+          - Arn
+      Timeout: 60
+      MemorySize: 256
+
+  SearchThingHandlerWrapper:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub 'SearchThingHandler-${ProjectId}'
+      Handler: com.lists.handler.SearchThingHandlerWrapper
       Runtime: java11
       Role:
         Fn::GetAtt:
