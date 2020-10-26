@@ -20,4 +20,8 @@ public abstract class AuditedEntity {
 
     @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.N)
     private Long createTimestamp;
+
+    @DynamoDBRangeKey(attributeName = "changeTimestamp")
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.N)
+    private Long changeTimestamp;
 }
