@@ -214,6 +214,9 @@ Resources:
         Fn::GetAtt:
           - LambdaExecutionRole
           - Arn
+      Environment:
+        Variables:
+          elasticEndpoint: !GetAtt ListsElasticsearchDomain.DomainEndpoint
       Timeout: 60
       MemorySize: 256
 
