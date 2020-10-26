@@ -24,6 +24,10 @@ public class Thing extends AuditedEntity {
     @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.N)
     private Long thingId;
 
+    @DynamoDBRangeKey(attributeName = "changeTimestamp")
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.N)
+    private Long changeTimestamp;
+
     @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.S)
     private String title;
 
